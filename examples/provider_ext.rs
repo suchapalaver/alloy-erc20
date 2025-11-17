@@ -1,14 +1,14 @@
 use alloy::primitives::{address, U256};
 use alloy::providers::ProviderBuilder;
 use alloy_erc20::Erc20ProviderExt;
-use dotenv::dotenv;
+use dotenvy::dotenv;
 use std::env;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
     dotenv().ok();
 
-    let eth_rpc = env::var("ETH_MAINNET_RPC").unwrap();
+    let eth_rpc = env::var("ETH_RPC").unwrap();
     let provider = ProviderBuilder::new().connect_http(eth_rpc.parse().unwrap());
 
     // Just retrieve a token from its address

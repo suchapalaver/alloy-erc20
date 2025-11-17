@@ -1,10 +1,10 @@
 use crate::provider::Erc20Contract;
 use alloy::{
+    contract::Error,
     network::Network,
     primitives::{Address, U256},
     providers::Provider,
 };
-use alloy::contract::Error;
 use async_once_cell::OnceCell;
 use bigdecimal::{
     num_bigint::{BigInt, Sign},

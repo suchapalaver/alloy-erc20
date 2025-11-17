@@ -29,6 +29,9 @@ where
     }
 }
 
+/// A view into an occupied entry in a [`TokenStore`].
+///
+/// This provides access to the token that is already stored.
 #[derive(Debug)]
 pub struct OccupiedEntry<'a> {
     value: &'a mut Token,
@@ -45,22 +48,25 @@ impl<'a> OccupiedEntry<'a> {
     }
 
     /// Gets a reference to the value in the entry.
-    pub fn get(&self) -> &Token {
+    pub const fn get(&self) -> &Token {
         self.value
     }
 
     /// Gets a mutable reference to the value in the entry.
-    pub fn get_mut(&mut self) -> &mut Token {
+    pub const fn get_mut(&mut self) -> &mut Token {
         self.value
     }
 
     /// Converts the `OccupiedEntry` into a mutable reference to the value in the entry
     /// with a lifetime bound to the map itself.
-    pub fn into_mut(self) -> &'a mut Token {
+    pub const fn into_mut(self) -> &'a mut Token {
         self.value
     }
 }
 
+/// A view into a vacant entry in a [`TokenStore`].
+///
+/// This can be used to insert a new token into the store.
 #[derive(Debug)]
 pub struct VacantEntry<'a, S>
 where
@@ -75,7 +81,7 @@ impl<'a, S> VacantEntry<'a, S>
 where
     S: TokenStore<'a>,
 {
-    pub fn new(chain_id: u64, id: TokenId, store: &'a mut S) -> Self {
+    pub const fn new(chain_id: u64, id: TokenId, store: &'a mut S) -> Self {
         Self {
             chain_id,
             id,
@@ -95,6 +101,15 @@ where
         self.chain_id
     }
 
+    /// Inserts a token into the vacant entry and returns a mutable reference to it.
+    ///
+    /// # Arguments
+    ///
+    /// * `token` - The token to insert into the store
+    ///
+    /// # Returns
+    ///
+    /// A mutable reference to the newly inserted token
     pub fn insert(self, token: Token) -> &'a mut Token {
         self.store.insert(self.chain_id, token);
         self.store.get_mut(self.chain_id, self.id.clone()).unwrap()

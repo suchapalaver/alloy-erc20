@@ -1,6 +1,6 @@
 use alloy::{primitives::address, providers::ProviderBuilder};
 use alloy_erc20::LazyToken;
-use dotenv::dotenv;
+use dotenvy::dotenv;
 use std::env;
 
 #[tokio::test]
