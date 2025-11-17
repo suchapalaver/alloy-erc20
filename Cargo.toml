@@ -61,3 +61,7 @@ doc-scrape-examples = true
 [[example]]
 name = "lazy"
 doc-scrape-examples = true
+
+[[example]]
+name = "write_operations"
+doc-scrape-examples = true
