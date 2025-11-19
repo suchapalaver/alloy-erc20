@@ -23,3 +23,26 @@ alloy-erc20 = "1.0"
 * A `LazyToken` struct, acting as a wrapper around Alloy contract instance,
   lazily retrieving `name`, `symbol`, `decimals` and `totalSupply` from the
   blockchain.
+* A `LazyTokenSigner` struct for executing write operations like `transfer`,
+  `approve`, and `transferFrom` with a signer-capable provider.
+
+## Testing
+
+This library includes comprehensive integration tests using [testcontainers-modules] and [Anvil].
+
+The integration tests:
+
+* Run completely standalone without external RPC dependencies
+* Deploy a mock ERC-20 contract to a blank Anvil dev chain
+* Test all `LazyToken` and `LazyTokenSigner` operations
+* Complete in approximately 1 second
+* Require only Docker to be installed
+
+To run the integration tests:
+
+```bash
+cargo test --test integration_tests
+```
+
+[testcontainers-modules]: https://github.com/testcontainers/testcontainers-modules
+[Anvil]: https://book.getfoundry.sh/reference/anvil/

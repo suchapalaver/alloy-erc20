@@ -139,14 +139,17 @@ where
 /// # Examples
 ///
 /// ```no_run
+/// use alloy::network::EthereumWallet;
 /// use alloy::primitives::{address, U256};
 /// use alloy::providers::ProviderBuilder;
+/// use alloy::signers::local::PrivateKeySigner;
 /// use alloy_erc20::LazyTokenSigner;
 ///
 /// # async fn example() -> Result<(), Box<dyn std::error::Error>> {
+/// let signer = PrivateKeySigner::random();
+/// let wallet = EthereumWallet::from(signer);
 /// let provider = ProviderBuilder::new()
-///     .with_recommended_fillers()
-///     .wallet(/* your wallet */)
+///     .wallet(wallet)
 ///     .connect_http("https://eth.llamarpc.com".parse()?);
 ///
 /// let token = LazyTokenSigner::new(
@@ -156,13 +159,13 @@ where
 ///
 /// // Transfer tokens
 /// let tx = token.transfer(
-///     address!("0x..."),
+///     address!("70997970C51812dc3A010C7d01b50e0d17dc79C8"),
 ///     U256::from(1000000000000000000u64) // 1 token with 18 decimals
 /// ).await?;
 ///
 /// // Wait for confirmation
-/// let receipt = tx.watch().await?;
-/// println!("Transfer confirmed in block {}", receipt.block_number.unwrap());
+/// let tx_hash = tx.watch().await?;
+/// println!("Transfer confirmed: {}", tx_hash);
 /// # Ok(())
 /// # }
 /// ```
@@ -237,14 +240,14 @@ where
     /// Transfers `amount` tokens to `to`.
     ///
     /// This sends the transaction to the network. Use the returned
-    /// [`PendingTransactionBuilder`] to wait for confirmation:
+    /// pending transaction builder to wait for confirmation:
     ///
     /// ```no_run
     /// # use alloy::primitives::{address, U256};
     /// # use alloy_erc20::LazyTokenSigner;
     /// # async fn example(token: LazyTokenSigner<impl alloy::providers::Provider<alloy::network::Ethereum> + Clone, alloy::network::Ethereum>) -> Result<(), Box<dyn std::error::Error>> {
     /// let pending_tx = token.transfer(
-    ///     address!("0x..."),
+    ///     address!("70997970C51812dc3A010C7d01b50e0d17dc79C8"),
     ///     U256::from(1000000000000000000u64)
     /// ).await?;
     ///
@@ -269,7 +272,7 @@ where
     /// Approves `spender` to transfer up to `amount` tokens on behalf of the caller.
     ///
     /// This sends the transaction to the network. Use the returned
-    /// [`PendingTransactionBuilder`] to wait for confirmation.
+    /// pending transaction builder to wait for confirmation.
     ///
     /// # Errors
     ///
@@ -286,7 +289,7 @@ where
     ///
     /// The caller must have sufficient allowance from `from` to transfer the tokens.
     /// This sends the transaction to the network. Use the returned
-    /// [`PendingTransactionBuilder`] to wait for confirmation.
+    /// pending transaction builder to wait for confirmation.
     ///
     /// # Errors
     ///

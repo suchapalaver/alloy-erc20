@@ -34,6 +34,7 @@ alloy = { version = "1.1.1", features = [
     "rpc-client",
     "contract",
     "sol-types",
+    "signer-local",
 ] }
 futures = "0.3"
 bigdecimal = "0.4"
@@ -48,6 +49,10 @@ parking_lot = { version = "0.12", optional = true, features = ["arc_lock"] }
 tokio = { version = "1", features = ["rt", "macros"] }
 reqwest = "0.12"
 dotenvy = "0.15"
+testcontainers-modules = { version = "0.12", features = ["anvil"] }
+alloy-provider = { version = "1.1.1", features = ["anvil-api"] }
+alloy-rpc-client = "1.1.1"
+alloy-transport-http = "1.1.1"
 
 
 [[example]]
