@@ -23,7 +23,7 @@ mod token;
 pub use token::Token;
 
 mod lazy_token;
-pub use lazy_token::LazyToken;
+pub use lazy_token::{LazyToken, LazyTokenSigner};
 
 mod token_id;
 pub use token_id::TokenId;

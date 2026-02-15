@@ -29,6 +29,9 @@ where
     }
 }
 
+/// A view into an occupied entry in a [`TokenStore`].
+///
+/// This provides access to the token that is already stored.
 #[derive(Debug)]
 pub struct OccupiedEntry<'a> {
     value: &'a mut Token,
@@ -61,6 +64,9 @@ impl<'a> OccupiedEntry<'a> {
     }
 }
 
+/// A view into a vacant entry in a [`TokenStore`].
+///
+/// This can be used to insert a new token into the store.
 #[derive(Debug)]
 pub struct VacantEntry<'a, S>
 where
@@ -95,6 +101,15 @@ where
         self.chain_id
     }
 
+    /// Inserts a token into the vacant entry and returns a mutable reference to it.
+    ///
+    /// # Arguments
+    ///
+    /// * `token` - The token to insert into the store
+    ///
+    /// # Returns
+    ///
+    /// A mutable reference to the newly inserted token
     pub fn insert(self, token: Token) -> &'a mut Token {
         self.store.insert(self.chain_id, token);
         self.store.get_mut(self.chain_id, self.id.clone()).unwrap()

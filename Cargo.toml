@@ -24,7 +24,7 @@ known-tokens = []
 lru-store = ["dep:lru", "dep:parking_lot"]
 
 [dependencies]
-alloy = { version = "1.0.37", features = [
+alloy = { version = "1.1.1", features = [
     "network",
     "providers",
     "transports",
@@ -34,6 +34,7 @@ alloy = { version = "1.0.37", features = [
     "rpc-client",
     "contract",
     "sol-types",
+    "signer-local",
 ] }
 futures = "0.3"
 bigdecimal = "0.4"
@@ -47,7 +48,11 @@ parking_lot = { version = "0.12", optional = true, features = ["arc_lock"] }
 [dev-dependencies]
 tokio = { version = "1", features = ["rt", "macros"] }
 reqwest = "0.12"
-dotenv = "0.15"
+dotenvy = "0.15"
+testcontainers-modules = { version = "0.12", features = ["anvil"] }
+alloy-provider = { version = "1.1.1", features = ["anvil-api"] }
+alloy-rpc-client = "1.1.1"
+alloy-transport-http = "1.1.1"
 
 
 [[example]]
@@ -60,4 +65,8 @@ doc-scrape-examples = true
 
 [[example]]
 name = "lazy"
+doc-scrape-examples = true
+
+[[example]]
+name = "write_operations"
 doc-scrape-examples = true
