@@ -45,18 +45,18 @@ impl<'a> OccupiedEntry<'a> {
     }
 
     /// Gets a reference to the value in the entry.
-    pub fn get(&self) -> &Token {
+    pub const fn get(&self) -> &Token {
         self.value
     }
 
     /// Gets a mutable reference to the value in the entry.
-    pub fn get_mut(&mut self) -> &mut Token {
+    pub const fn get_mut(&mut self) -> &mut Token {
         self.value
     }
 
     /// Converts the `OccupiedEntry` into a mutable reference to the value in the entry
     /// with a lifetime bound to the map itself.
-    pub fn into_mut(self) -> &'a mut Token {
+    pub const fn into_mut(self) -> &'a mut Token {
         self.value
     }
 }
@@ -75,7 +75,7 @@ impl<'a, S> VacantEntry<'a, S>
 where
     S: TokenStore<'a>,
 {
-    pub fn new(chain_id: u64, id: TokenId, store: &'a mut S) -> Self {
+    pub const fn new(chain_id: u64, id: TokenId, store: &'a mut S) -> Self {
         Self {
             chain_id,
             id,
