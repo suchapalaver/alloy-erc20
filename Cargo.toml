@@ -1,7 +1,7 @@
 [package]
 name = "alloy-erc20"
 version = "1.0.0"
-edition = "2021"
+edition = "2024"
 authors = ["leruaa"]
 keywords = ["alloy", "ethereum", "erc20"]
 categories = ["cryptography::cryptocurrencies", "data-structures"]
@@ -24,7 +24,7 @@ known-tokens = []
 lru-store = ["dep:lru", "dep:parking_lot"]
 
 [dependencies]
-alloy = { version = "1.1.1", features = [
+alloy = { version = "1.6.3", features = [
     "network",
     "providers",
     "transports",
@@ -47,7 +47,7 @@ parking_lot = { version = "0.12", optional = true, features = ["arc_lock"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["rt", "macros"] }
-reqwest = "0.12"
+reqwest = "0.13"
 dotenvy = "0.15"
 testcontainers-modules = { version = "0.12", features = ["anvil"] }
 alloy-provider = { version = "1.1.1", features = ["anvil-api"] }
